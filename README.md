@@ -1,6 +1,8 @@
 # Fluent IO
 A Golang library for fluent that implements the standard writer io interface.
 
+[![Go Reference](https://pkg.go.dev/badge/go.gllm.dev/fluentio.svg)](https://pkg.go.dev/go.gllm.dev/fluentio) [![Go Report Card](https://goreportcard.com/badge/go.gllm.dev/fluentio)](https://goreportcard.com/report/go.gllm.dev/fluentio)
+
 ## Installation
 ```bash
 go get go.gllm.dev/fluentio
