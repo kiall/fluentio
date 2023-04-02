@@ -6,6 +6,7 @@ import (
 	"io"
 )
 
+// Writer is an io.Writer that writes to fluentd.
 type Writer struct {
 	client *fluent.Fluent
 	tag    string
@@ -13,6 +14,9 @@ type Writer struct {
 
 var _ io.Writer = (*Writer)(nil)
 
+// New creates a new Writer.
+// It accepts a variadic number of options that can be used to configure the Writer.
+// If no options are provided, it will return an error.
 func New(opts ...func(config *Config)) (*Writer, error) {
 	config := new(Config)
 	for _, opt := range opts {
@@ -56,6 +60,7 @@ func New(opts ...func(config *Config)) (*Writer, error) {
 	}, nil
 }
 
+// Write is the implementation of io.Writer.
 func (f *Writer) Write(p []byte) (n int, err error) {
 	var m map[string]interface{}
 	err = json.Unmarshal(p, &m)
