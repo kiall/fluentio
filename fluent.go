@@ -23,24 +23,16 @@ func New(opts ...func(config *Config)) (*Writer, error) {
 		opt(config)
 	}
 
-	if config == nil {
-		return nil, ErrNoConfigProvided
-	}
-
 	var cfg *fluent.Config
-
 	if config.basicConfig != nil {
 		cfg = &fluent.Config{
-			FluentHost: config.basicConfig.FluentHost,
-			FluentPort: config.basicConfig.FluentPort,
+			FluentHost:         config.basicConfig.FluentHost,
+			FluentPort:         config.basicConfig.FluentPort,
+			SubSecondPrecision: config.basicConfig.Milliseconds,
 		}
-	}
-
-	if config.fluentConfig != nil {
+	} else if config.fluentConfig != nil {
 		cfg = config.fluentConfig
-	}
-
-	if cfg == nil {
+	} else {
 		return nil, ErrNoConfigProvided
 	}
 

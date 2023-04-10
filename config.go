@@ -11,16 +11,18 @@ type Config struct {
 
 // BasicConfig is used to configure the Writer with a basic configuration.
 type BasicConfig struct {
-	FluentHost string
-	FluentPort int
+	FluentHost   string
+	FluentPort   int
+	Milliseconds bool
 }
 
 // WithBasicConfig returns a function that can be used to configure the Writer with a basic configuration.
-func WithBasicConfig(host string, port int) func(*Config) {
+func WithBasicConfig(host string, port int, milliseconds bool) func(*Config) {
 	return func(c *Config) {
 		c.basicConfig = &BasicConfig{
-			FluentHost: host,
-			FluentPort: port,
+			FluentHost:   host,
+			FluentPort:   port,
+			Milliseconds: milliseconds,
 		}
 	}
 }
