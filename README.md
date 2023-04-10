@@ -19,7 +19,7 @@ import (
 
 func main() {
     // Create a new fluentio.Writer
-    f, err := fluentio.New(fluentio.WithBasicConfig("127.0.0.1", 24224))
+    f, err := fluentio.New(fluentio.WithBasicConfig("127.0.0.1", 24224, true))
     if err != nil {
         os.Exit(1) 
     }
@@ -39,7 +39,7 @@ func main() {
 The fluentio.Writer can be configured with the following options:
 ```go
 // WithBasicConfig creates a new fluentio.Writer with a basic configuration
-fluentio.New(fluentio.WithBasicConfig("127.0.0.1", 24224))
+fluentio.New(fluentio.WithBasicConfig("127.0.0.1", 24224, true))
 
 // WithFluentConfig creates a new fluentio.Writer with a standard fluent Config
 // See github.com/fluent/fluent-logger-golang for more information
