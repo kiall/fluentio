@@ -7,6 +7,10 @@ import (
 	"github.com/fluent/fluent-logger-golang/fluent"
 )
 
+const (
+	fluentTagKey = "_fluent_tag"
+)
+
 // Writer is an io.Writer that writes to fluentd.
 type Writer struct {
 	config        *Config
@@ -70,7 +74,14 @@ func (f *Writer) Write(p []byte) (n int, err error) {
 		return 0, err
 	}
 
-	err = f.client.Post(f.tag, m)
+	// Allow for overriding the Fluent Tag per-event with
+	// the _fluent_tag key.
+	tag := f.tag
+	if overrideTag, ok := m[fluentTagKey].(string); ok {
+		tag = overrideTag
+	}
+
+	err = f.client.Post(tag, m)
 	if err != nil {
 		return 0, err
 	}
