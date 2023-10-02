@@ -1,4 +1,4 @@
-module go.gllm.dev/fluentio
+module github.com/kiall/fluentio
 
 go 1.20
 
